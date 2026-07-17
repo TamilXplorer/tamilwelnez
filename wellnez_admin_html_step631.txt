@@ -1,0 +1,112 @@
+﻿Created At: 2026-07-17T11:56:36Z
+Completed At: 2026-07-17T11:56:36Z
+File Path: `file:///e:/Work/your%20wellnez/scratch/extracted_admin.html`
+Total Lines: 103
+Total Bytes: 7394
+Showing lines 1 to 103
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1:                             </tbody>
+2:                         </table>
+3:                     </div>
+4:                 </div>
+5:             `;
+6:         };
+7: 
+8:         const renderPaymentsTab = () => {
+9:             const methods = Store.getPaymentMethods();
+10:             const upi = Store.getUPISettings();
+11:             return `
+12:                 <div class="admin-section-box">
+13:                     <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:15px; margin-bottom:25px;">
+14:                         <h3 style="border:none; margin:0;">Payment Methods</h3>
+15:                         <span style="font-size:0.8rem; color:var(--text-muted); font-family:var(--font-heading);">Toggle to show/hide methods on customer checkout</span>
+16:                     </div>
+17:                     <div style="display:flex; flex-direction:column; gap:0;">
+18:                         ${methods.map(m => `
+19:                         <div style="display:flex; justify-content:space-between; align-items:center; padding:20px 0; border-bottom:1px dashed var(--border-color);">
+20:                             <div style="display:flex; align-items:center; gap:15px;">
+21:                                 <div style="width:44px; height:44px; border-radius:8px; border:1px solid var(--border-color); display:flex; align-items:center; justify-content:center; background:var(--bg-primary); font-size:1.2rem;">
+22:                                     <i class="${m.icon}"></i>
+23:                                 </div>
+24:                                 <div>
+25:                                     <div style="font-weight:700; font-family:var(--font-heading); text-transform:uppercase; font-size:0.85rem;">${m.name}</div>
+26:                                     <div style="font-size:0.75rem; color:var(--text-muted); margin-top:3px;">${m.enabled ? '<span style="color:#27ae60;"><i class="fa-solid fa-circle-check"></i> Active on checkout</span>' : '<span style="color:#e74c3c;"><i class="fa-solid fa-circle-xmark"></i> Hidden from customers</span>'}</div>
+27:                                 </div>
+28:                             </div>
+29:                             <label class="payment-toggle" style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+30:                                 <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">${m.enabled ? 'Enabled' : 'Disabled'}</span>
+31:                                 <div class="toggle-switch ${m.enabled ? 'on' : ''}" data-payment-id="${m.id}">
+32:                                     <div class="toggle-thumb"></div>
+33:                                 </div>
+34:                             </label>
+35:                         </div>
+36:                         `).join('')}
+37:                     </div>
+38:                 </div>
+39: 
+40:                 <!-- UPI Settings Card -->
+41:                 <div class="admin-section-box" style="margin-top:25px;">
+42:                     <div style="display:flex; align-items:center; gap:12px; border-bottom:1px solid var(--border-color); padding-bottom:15px; margin-bottom:25px;">
+43:                         <div style="width:40px; height:40px; border-radius:8px; background:var(--metallic-chrome); display:flex; align-items:center; justify-content:center; font-size:1.1rem;"><i class="fa-solid fa-qrcode"></i></div>
+44:                         <div>
+45:                             <h3 style="border:none; margin:0;">UPI Payment Settings</h3>
+46:                             <p style="color:var(--text-muted); font-size:0.8rem; margin:0;">Set your UPI ID and QR code — shown to customers at checkout</p>
+47:                         </div>
+48:                     </div>
+49: 
+50:                     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:35px; align-items:start;">
+51:                         <form id="upi-settings-form">
+52:                             <div class="form-group">
+53:                                 <label for="upi-id-input">UPI ID</label>
+54:                                 <input type="text" id="upi-id-input" class="form-control" placeholder="yourname@upi" value="${upi.upiId}">
+55:                                 <p style="font-size:0.78rem; color:var(--text-muted); margin-top:6px;">e.g. wellnez@okicici, 9876543210@paytm</p>
+56:                             </div>
+57:                             <div class="form-group">
+58:                                 <label for="upi-qr-input">Upload QR Code Image</label>
+59:                                 <input type="file" id="upi-qr-input" class="form-control" accept="image/*" style="padding:8px;">
+60:                                 <p style="font-size:0.78rem; color:var(--text-muted); margin-top:6px;">PNG or JPG, recommended 400×400px</p>
+61:                             </div>
+62:                             <button type="submit" class="btn btn-chrome btn-block" style="margin-top:5px;"><i class="fa-solid fa-floppy-disk"></i> Save UPI Settings</button>
+63:                         </form>
+64: 
+65:                         <div style="text-align:center;">
+66:                             <p style="font-family:var(--font-heading); font-size:0.8rem; font-weight:700; text-transform:uppercase; margin-bottom:12px; color:var(--text-muted);">QR Preview</p>
+67:                             ${upi.qrBase64
+68:                                 ? `<div style="border:1px solid var(--border-color); padding:15px; background:#FFF; display:inline-block;">
+69:                                     <img src="${upi.qrBase64}" alt="UPI QR Code" style="width:180px; height:180px; object-fit:contain; display:block;">
+70:                                    </div>
+71:                                    <p style="font-size:0.75rem; margin-top:10px; font-weight:600; color:#27ae60;"><i class="fa-solid fa-circle-check"></i> QR Code saved</p>
+72:                                    ${upi.upiId ? `<p style="font-size:0.8rem; margin-top:5px; color:var(--text-muted);">UPI ID: <strong>${upi.upiId}</strong></p>` : ''}`
+73:                                 : `<div style="border:2px dashed var(--border-color); padding:40px 20px; background:var(--bg-primary); color:var(--text-muted);">
+74:                                     <i class="fa-solid fa-qrcode" style="font-size:3rem; margin-bottom:12px; opacity:0.3;"></i>
+75:                                     <p style="font-size:0.85rem;">No QR code uploaded yet</p>
+76:                                    </div>`
+77:                             }
+78:                         </div>
+79:                     </div>
+80:                 </div>
+81:             `;
+82:         };
+83: 
+84:         const activeViewHtml = activeTab === "dashboard"
+85:             ? renderDashboardTab()
+86:             : activeTab === "products"
+87:                 ? renderProductsTab()
+88:                 : activeTab === "orders"
+89:                     ? renderOrdersTab()
+90:                     : activeTab === "coupons"
+91:                         ? renderCouponsTab()
+92:                         : activeTab === "payments"
+93:                             ? renderPaymentsTab()
+94:                             : renderCustomersTab();
+95: 
+96:         viewport.innerHTML = `
+97:             <div class="admin-layout" style="max-width: 100% !important; padding-left: 4vw !important; padding-right: 4vw !important;">
+98:                 <div class="admin-header-row">
+99:                     <div>
+100:                         <h1 style="margin: 0; font-size: 2rem;">your Wellnez Admin Panel</h1>
+101:                     </div>
+102: 
+103: 
+The above content shows the entire, complete file contents of the requested file.
+

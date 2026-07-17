@@ -1,0 +1,36 @@
+﻿Created At: 2026-07-17T11:56:51Z
+Completed At: 2026-07-17T11:56:51Z
+File Path: `file:///e:/Work/your%20wellnez/scratch/recovered_wellnez_admin.html`
+Total Lines: 27
+Total Bytes: 844
+Showing lines 1 to 27
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1: <!DOCTYPE html>
+2: <html lang="en">
+3: <head>
+4:     <meta charset="UTF-8">
+5:     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+6:     <title>Admin Dashboard | HR Hitech Technology</title>
+7:     <link rel="stylesheet" href="style.css">
+8:     <style>
+9:         /* Embedded styling helper for admin dashboard layout elements */
+10:         body.admin-body {
+11:             background-color: #080315;
+12:             color: #f8fafc;
+13:             min-height: 100vh;
+14:             font-family: 'Inter', sans-serif;
+15:             display: flex;
+16:             align-items: center;
+17:             justify-content: center;
+18:         }
+19: 
+20:         .login-overlay {
+21:             width: 100%;
+22:             max-width: 420px;
+23:             padding: 40px;
+24:             background: rgba(13, 7, 36, 0.6);
+25:             border: 1px solid rgba(168, 85, 247, 0.2);
+26: 
+27: 
+The above content shows the entire, complete file contents of the requested file.
+

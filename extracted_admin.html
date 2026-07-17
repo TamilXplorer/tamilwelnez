@@ -1,0 +1,102 @@
+﻿                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        };
+
+        const renderPaymentsTab = () => {
+            const methods = Store.getPaymentMethods();
+            const upi = Store.getUPISettings();
+            return `
+                <div class="admin-section-box">
+                    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:15px; margin-bottom:25px;">
+                        <h3 style="border:none; margin:0;">Payment Methods</h3>
+                        <span style="font-size:0.8rem; color:var(--text-muted); font-family:var(--font-heading);">Toggle to show/hide methods on customer checkout</span>
+                    </div>
+                    <div style="display:flex; flex-direction:column; gap:0;">
+                        ${methods.map(m => `
+                        <div style="display:flex; justify-content:space-between; align-items:center; padding:20px 0; border-bottom:1px dashed var(--border-color);">
+                            <div style="display:flex; align-items:center; gap:15px;">
+                                <div style="width:44px; height:44px; border-radius:8px; border:1px solid var(--border-color); display:flex; align-items:center; justify-content:center; background:var(--bg-primary); font-size:1.2rem;">
+                                    <i class="${m.icon}"></i>
+                                </div>
+                                <div>
+                                    <div style="font-weight:700; font-family:var(--font-heading); text-transform:uppercase; font-size:0.85rem;">${m.name}</div>
+                                    <div style="font-size:0.75rem; color:var(--text-muted); margin-top:3px;">${m.enabled ? '<span style="color:#27ae60;"><i class="fa-solid fa-circle-check"></i> Active on checkout</span>' : '<span style="color:#e74c3c;"><i class="fa-solid fa-circle-xmark"></i> Hidden from customers</span>'}</div>
+                                </div>
+                            </div>
+                            <label class="payment-toggle" style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+                                <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">${m.enabled ? 'Enabled' : 'Disabled'}</span>
+                                <div class="toggle-switch ${m.enabled ? 'on' : ''}" data-payment-id="${m.id}">
+                                    <div class="toggle-thumb"></div>
+                                </div>
+                            </label>
+                        </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <!-- UPI Settings Card -->
+                <div class="admin-section-box" style="margin-top:25px;">
+                    <div style="display:flex; align-items:center; gap:12px; border-bottom:1px solid var(--border-color); padding-bottom:15px; margin-bottom:25px;">
+                        <div style="width:40px; height:40px; border-radius:8px; background:var(--metallic-chrome); display:flex; align-items:center; justify-content:center; font-size:1.1rem;"><i class="fa-solid fa-qrcode"></i></div>
+                        <div>
+                            <h3 style="border:none; margin:0;">UPI Payment Settings</h3>
+                            <p style="color:var(--text-muted); font-size:0.8rem; margin:0;">Set your UPI ID and QR code — shown to customers at checkout</p>
+                        </div>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:35px; align-items:start;">
+                        <form id="upi-settings-form">
+                            <div class="form-group">
+                                <label for="upi-id-input">UPI ID</label>
+                                <input type="text" id="upi-id-input" class="form-control" placeholder="yourname@upi" value="${upi.upiId}">
+                                <p style="font-size:0.78rem; color:var(--text-muted); margin-top:6px;">e.g. wellnez@okicici, 9876543210@paytm</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="upi-qr-input">Upload QR Code Image</label>
+                                <input type="file" id="upi-qr-input" class="form-control" accept="image/*" style="padding:8px;">
+                                <p style="font-size:0.78rem; color:var(--text-muted); margin-top:6px;">PNG or JPG, recommended 400×400px</p>
+                            </div>
+                            <button type="submit" class="btn btn-chrome btn-block" style="margin-top:5px;"><i class="fa-solid fa-floppy-disk"></i> Save UPI Settings</button>
+                        </form>
+
+                        <div style="text-align:center;">
+                            <p style="font-family:var(--font-heading); font-size:0.8rem; font-weight:700; text-transform:uppercase; margin-bottom:12px; color:var(--text-muted);">QR Preview</p>
+                            ${upi.qrBase64
+                                ? `<div style="border:1px solid var(--border-color); padding:15px; background:#FFF; display:inline-block;">
+                                    <img src="${upi.qrBase64}" alt="UPI QR Code" style="width:180px; height:180px; object-fit:contain; display:block;">
+                                   </div>
+                                   <p style="font-size:0.75rem; margin-top:10px; font-weight:600; color:#27ae60;"><i class="fa-solid fa-circle-check"></i> QR Code saved</p>
+                                   ${upi.upiId ? `<p style="font-size:0.8rem; margin-top:5px; color:var(--text-muted);">UPI ID: <strong>${upi.upiId}</strong></p>` : ''}`
+                                : `<div style="border:2px dashed var(--border-color); padding:40px 20px; background:var(--bg-primary); color:var(--text-muted);">
+                                    <i class="fa-solid fa-qrcode" style="font-size:3rem; margin-bottom:12px; opacity:0.3;"></i>
+                                    <p style="font-size:0.85rem;">No QR code uploaded yet</p>
+                                   </div>`
+                            }
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
+        const activeViewHtml = activeTab === "dashboard"
+            ? renderDashboardTab()
+            : activeTab === "products"
+                ? renderProductsTab()
+                : activeTab === "orders"
+                    ? renderOrdersTab()
+                    : activeTab === "coupons"
+                        ? renderCouponsTab()
+                        : activeTab === "payments"
+                            ? renderPaymentsTab()
+                            : renderCustomersTab();
+
+        viewport.innerHTML = `
+            <div class="admin-layout" style="max-width: 100% !important; padding-left: 4vw !important; padding-right: 4vw !important;">
+                <div class="admin-header-row">
+                    <div>
+                        <h1 style="margin: 0; font-size: 2rem;">your Wellnez Admin Panel</h1>
+                    </div>
+

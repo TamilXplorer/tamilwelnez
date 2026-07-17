@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Supabase client JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <title>your Wellnez | Skin Barrier-First Skincare</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Dermatologist-formulated, barrier-supporting skincare.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body style="overflow: hidden;">
+
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <p>FREE SHIPPING ON ORDERS ABOVE ₹999 | USE CODE <span class="promo-badge">WELLNEZ10</span> FOR 10% OFF</p>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="main-header">
+        <div class="header-container">
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- Brand Logo -->
+            <a href="#/" class="brand-logo" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+                <img src="images/logo.png" alt="your Wellnez Logo" style="height: 52px; max-height: 52px; object-fit: contain; display: block;">
+                <span style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; text-transform: lowercase; letter-spacing: -0.03em; color: var(--text-main); line-height: 1;">your Wellnez</span>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="nav-menu" id="nav-menu">
+                <button class="nav-menu-close" id="nav-close">×</button>
+                <ul>
+                    <li><a href="#/">Home</a></li>
+                    <li><a href="#/shop">Shop</a></li>
+                    <li><a href="#/about">About Us</a></li>
+                    <li><a href="#/contact">Contact Us</a></li>
+                    <li><a href="#/faq">FAQ</a></li>
+                </ul>
+            </nav>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <!-- Search Button -->
+                <div class="search-container">
+                    <button id="search-trigger" aria-label="Search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <div class="search-dropdown" id="search-dropdown">
+                        <div class="search-input-wrapper">
+                            <input type="text" id="search-input" placeholder="Search products (e.g. face wash, sunscreen)...">
+                            <button id="search-submit-btn"><i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                        <div class="search-results-preview" id="search-results-preview"></div>
+                    </div>
+                </div>
+
+                <!-- Account Icon -->
+                <a href="#/account" class="header-action-btn" id="account-btn" aria-label="My Account">
+                    <i class="fa-regular fa-user"></i>
+                </a>
+
+                <!-- Wishlist Icon -->
+                <a href="#/wishlist" class="header-action-btn" id="wishlist-btn" aria-label="Wishlist">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="badge" id="wishlist-count">0</span>
+                </a>
+
+                <!-- Cart Icon -->
+                <button class="header-action-btn" id="cart-toggle-btn" aria-label="Shopping Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="badge" id="cart-count">1</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="app-viewport">
+            <section class="hero-banner">
+                <div class="hero-container">
+                    <div class="hero-text">
+                        <span class="hero-badge">Clean &amp; Cruelty-Free</span>
+                        <h1>Skin Barrier First. Actives Second.</h1>
+                        <p>High-performance skincare formulated to reinforce your natural lipids, lock in hydration, and shield against environmental stressors.</p>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a href="#/shop" class="btn btn-chrome">Shop the collection</a>
+                            <a href="#/about" class="btn btn-secondary">Our Philosophy</a>
+                        </div>
+                    </div>
+                    <div class="hero-image-wrapper">
+                        <div class="hero-circle"></div>
+                        <img src="images/hero.png" alt="your Wellnez Skincare Products Hero">
+                    </div>
+                </div>
+            </section>
+
+            <section class="features-section">
+                <div class="section-header">
+                    <h2>Formulated for Skin Health</h2>
+                    <p>We combine advanced dermatology concepts with clean ingredients to prioritize skin barrier defense.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper"><i class="fa-solid fa-droplet"></i></div>
+                        <h3>Intense Hydration</h3>
+                        <p>Contains multi-molecular hyaluronic acid and natural lipids that mimic your skin's natural hydration matrix.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3>Barrier First</h3>
+                        <p>Soothes active breakouts and prevents water loss with dynamic Ceramide-NP integrations.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper"><i class="fa-solid fa-flask"></i></div>
+                        <h3>pH-Balanced</h3>
+                        <p>Formulated at optimal physiological pH ranges (5.5 - 6.0) to preserve acid mantle homeostasis.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="products-section">
+                <div class="section-header">
+                    <h2>Our Best Sellers</h2>
+                    <p>Start your minimalist skincare routine with our dermatologist-approved core daily essentials.</p>
+                </div>
+                <div class="products-grid">
+                <div class="product-card" data-product-id="face-wash">
+                    <span class="product-card-badge">Sale</span>
+                    <button class="product-card-wishlist " data-id="face-wash" aria-label="Add to Wishlist">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                    <a href="#/product/face-wash">
+                        <div class="product-card-image">
+                            <img class="product-card-img" src="images/face_wash.png" alt="Slick Cleanse Hydrating Wash">
+                            <video class="product-card-video-hover" src="https://player.vimeo.com/external/188216678.hd.mp4?s=2095ec96830131a5474bddcea37b82f2c98c54fa&amp;profile_id=119" loop="" muted="" playsinline="" preload="none"></video>
+                        </div>
+                    </a>
+                    <div class="product-card-info">
+                        <div class="product-card-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <span>4.5 (2)</span>
+                        </div>
+                        <a href="#/product/face-wash">
+                            <h3 class="product-card-title">Slick Cleanse Hydrating Wash</h3>
+                        </a>
+                        <p class="product-card-skin">All skin types</p>
+                        <div class="product-card-bottom">
+                            <div class="product-card-price">
+                                ₹699
+                                <span class="compare-price">₹899</span>
+                            </div>
+                            <button class="btn btn-chrome product-card-cta add-to-cart-btn" data-id="face-wash">Add to Bag</button>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="product-card" data-product-id="sunscreen">
+                    <span class="product-card-badge">Sale</span>
+                    <button class="product-card-wishlist " data-id="sunscreen" aria-label="Add to Wishlist">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                    <a href="#/product/sunscreen">
+                        <div class="product-card-image">
+                            <img class="product-card-img" src="images/sunscreen.png" alt="Shield Guard Matte Sunscreen SPF 50+">
+                            <video class="product-card-video-hover" src="https://player.vimeo.com/external/372535660.sd.mp4?s=396d52af437419d5b0b018d97b67d524e3a44a7d&amp;profile_id=139&amp;oauth2_token_id=1223210874" loop="" muted="" playsinline="" preload="none"></video>
+                        </div>
+                    </a>
+                    <div class="product-card-info">
+                        <div class="product-card-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <span>5.0 (2)</span>
+                        </div>
+                        <a href="#/product/sunscreen">
+                            <h3 class="product-card-title">Shield Guard Matte Sunscreen SPF 50+</h3>
+                        </a>
+                        <p class="product-card-skin">Oily</p>
+                        <div class="product-card-bottom">
+                            <div class="product-card-price">
+                                ₹849
+                                <span class="compare-price">₹999</span>
+                            </div>
+                            <button class="btn btn-chrome product-card-cta add-to-cart-btn" data-id="sunscreen">Add to Bag</button>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="product-card" data-product-id="face-toner">
+                    <span class="product-card-badge">Sale</span>
+                    <button class="product-card-wishlist " data-id="face-toner" aria-label="Add to Wishlist">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                    <a href="#/product/face-toner">
+                        <div class="product-card-image">
+                            <img class="product-card-img" src="images/toner.png" alt="Dew Barrier Hydrating Toner">
+                            <video class="product-card-video-hover" src="https://player.vimeo.com/external/372436717.sd.mp4?s=94b20ca07817031c0ad538e2227d413f8e716d95&amp;profile_id=139&amp;oauth2_token_id=1223210874" loop="" muted="" playsinline="" preload="none"></video>
+                        </div>
+                    </a>
+                    <div class="product-card-info">
+                        <div class="product-card-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <span>5.0 (2)</span>
+                        </div>
+                        <a href="#/product/face-toner">
+                            <h3 class="product-card-title">Dew Barrier Hydrating Toner</h3>
+                        </a>
+                        <p class="product-card-skin">Dry</p>
+                        <div class="product-card-bottom">
+                            <div class="product-card-price">
+                                ₹699
+                                <span class="compare-price">₹799</span>
+                            </div>
+                            <button class="btn btn-chrome product-card-cta add-to-cart-btn" data-id="face-toner">Add to Bag</button>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="product-card" data-product-id="moisturizing-cream">
+                    <span class="product-card-badge">Sale</span>
+                    <button class="product-card-wishlist " data-id="moisturizing-cream" aria-label="Add to Wishlist">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                    <a href="#/product/moisturizing-cream">
+                        <div class="product-card-image">
+                            <img class="product-card-img" src="images/cream.png" alt="Ceramide Cushion Moisture Cream">
+                            <video class="product-card-video-hover" src="https://player.vimeo.com/external/551733120.sd.mp4?s=2e1a1ee51e923fd7529d774970fb2bdd56d9a65c&amp;profile_id=165" loop="" muted="" playsinline="" preload="none"></video>
+                        </div>
+                    </a>
+                    <div class="product-card-info">
+                        <div class="product-card-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <span>4.5 (2)</span>
+                        </div>
+                        <a href="#/product/moisturizing-cream">
+                            <h3 class="product-card-title">Ceramide Cushion Moisture Cream</h3>
+                        </a>
+                        <p class="product-card-skin">Normal</p>
+                        <div class="product-card-bottom">
+                            <div class="product-card-price">
+                                ₹899
+                                <span class="compare-price">₹999</span>
+                            </div>
+                            <button class="btn btn-chrome product-card-cta add-to-cart-btn" data-id="moisturizing-cream">Add to Bag</button>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="product-card" data-product-id="eye-gel">
+                    <span class="product-card-badge">Sale</span>
+                    <button class="product-card-wishlist " data-id="eye-gel" aria-label="Add to Wishlist">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                    <a href="#/product/eye-gel">
+                        <div class="product-card-image">
+                            <img class="product-card-img" src="images/eye_gel.png" alt="Lash &amp; Line Peptide Eye Gel">
+                            <video class="product-card-video-hover" src="https://player.vimeo.com/external/372789822.sd.mp4?s=ff563b4a77e1f7265a6d96d66ea9f96940d9acbe&amp;profile_id=139&amp;oauth2_token_id=1223210874" loop="" muted="" playsinline="" preload="none"></video>
+                        </div>
+                    </a>
+                    <div class="product-card-info">
+                        <div class="product-card-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <span>4.0 (1)</span>
+                        </div>
+                        <a href="#/product/eye-gel">
+                            <h3 class="product-card-title">Lash &amp; Line Peptide Eye Gel</h3>
+                        </a>
+                        <p class="product-card-skin">All skin types showing fatigue or fine lines</p>
+                        <div class="product-card-bottom">
+                            <div class="product-card-price">
+                                ₹599
+                                <span class="compare-price">₹699</span>
+                            </div>
+                            <button class="btn btn-chrome product-card-cta add-to-cart-btn" data-id="eye-gel">Add to Bag</button>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="product-card" data-product-id="serum">
+                    <span class="product-card-badge">Sale</span>
+                    <button class="product-card-wishlist " data-id="serum" aria-label="Add to Wishlist">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                    <a href="#/product/serum">
+                        <div class="product-card-image">
+                            <img class="product-card-img" src="images/serum.png" alt="Blemish Focus Niacinamide Serum">
+                            <video class="product-card-video-hover" src="https://player.vimeo.com/external/223840006.hd.mp4?s=54a1da69d40a39c25fa2088d50ed0d46447e7149&amp;profile_id=175" loop="" muted="" playsinline="" preload="none"></video>
+                        </div>
+                    </a>
+                    <div class="product-card-info">
+                        <div class="product-card-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <span>5.0 (2)</span>
+                        </div>
+                        <a href="#/product/serum">
+                            <h3 class="product-card-title">Blemish Focus Niacinamide Serum</h3>
+                        </a>
+                        <p class="product-card-skin">Oily</p>
+                        <div class="product-card-bottom">
+                            <div class="product-card-price">
+                                ₹799
+                                <span class="compare-price">₹899</span>
+                            </div>
+                            <button class="btn btn-chrome product-card-cta add-to-cart-btn" data-id="serum">Add to Bag</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </section>
+
+            <!-- Social Reels Carousel Section (sacheu.com style) -->
+            <section class="social-reels-section">
+                <div class="section-header">
+                    <span class="section-badge">#yourWellnezGlow</span>
+                    <h2>How We Glow: See It In Action</h2>
+                    <p>Real results. Real reviews. Tap a video to unmute and learn how to use our barrier-first skincare.</p>
+                </div>
+                <div class="reels-slider-wrapper">
+                    <button class="reels-control-btn prev-btn" id="reels-prev-btn" aria-label="Previous videos"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div class="reels-container" id="reels-container">
+                        
+            <div class="reel-item">
+                <div class="reel-card" data-product-id="face-wash">
+                    <video class="reel-video" src="https://player.vimeo.com/external/188216678.hd.mp4?s=2095ec96830131a5474bddcea37b82f2c98c54fa&amp;profile_id=119" loop="" muted="" autoplay="" playsinline=""></video>
+                    <div class="reel-overlay">
+                        <div class="reel-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="reel-sound-indicator"><i class="fa-solid fa-volume-xmark"></i></div>
+                        <div class="reel-info-box">
+                            <p class="reel-caption">pH 5.5 gentle cleanse</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reel-product-footer">
+                    <a href="#/product/face-wash" class="reel-product-title">Slick Cleanse Wash</a>
+                    <span class="reel-product-price">₹699</span>
+                    <button class="btn btn-chrome reel-buy-btn add-to-cart-btn" data-id="face-wash">Add to Bag</button>
+                </div>
+            </div>
+        
+            <div class="reel-item">
+                <div class="reel-card" data-product-id="sunscreen">
+                    <video class="reel-video" src="https://player.vimeo.com/external/372535660.sd.mp4?s=396d52af437419d5b0b018d97b67d524e3a44a7d&amp;profile_id=139&amp;oauth2_token_id=1223210874" loop="" muted="" autoplay="" playsinline=""></video>
+                    <div class="reel-overlay">
+                        <div class="reel-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="reel-sound-indicator"><i class="fa-solid fa-volume-xmark"></i></div>
+                        <div class="reel-info-box">
+                            <p class="reel-caption">Zero white cast formula</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reel-product-footer">
+                    <a href="#/product/sunscreen" class="reel-product-title">Shield Guard SPF 50+</a>
+                    <span class="reel-product-price">₹849</span>
+                    <button class="btn btn-chrome reel-buy-btn add-to-cart-btn" data-id="sunscreen">Add to Bag</button>
+                </div>
+            </div>
+        
+            <div class="reel-item">
+                <div class="reel-card" data-product-id="face-toner">
+                    <video class="reel-video" src="https://player.vimeo.com/external/372436717.sd.mp4?s=94b20ca07817031c0ad538e2227d413f8e716d95&amp;profile_id=139&amp;oauth2_token_id=1223210874" loop="" muted="" autoplay="" playsinline=""></video>
+                    <div class="reel-overlay">
+                        <div class="reel-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="reel-sound-indicator"><i class="fa-solid fa-volume-xmark"></i></div>
+                        <div class="reel-info-box">
+                            <p class="reel-caption">Milky hydration layers</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reel-product-footer">
+                    <a href="#/product/face-toner" class="reel-product-title">Dew Barrier Toner</a>
+                    <span class="reel-product-price">₹699</span>
+                    <button class="btn btn-chrome reel-buy-btn add-to-cart-btn" data-id="face-toner">Add to Bag</button>
+                </div>
+            </div>
+        
+            <div class="reel-item">
+                <div class="reel-card" data-product-id="moisturizing-cream">
+                    <video class="reel-video" src="https://player.vimeo.com/external/551733120.sd.mp4?s=2e1a1ee51e923fd7529d774970fb2bdd56d9a65c&amp;profile_id=165" loop="" muted="" autoplay="" playsinline=""></video>
+                    <div class="reel-overlay">
+                        <div class="reel-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="reel-sound-indicator"><i class="fa-solid fa-volume-xmark"></i></div>
+                        <div class="reel-info-box">
+                            <p class="reel-caption">Barrier repair in 3 days</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reel-product-footer">
+                    <a href="#/product/moisturizing-cream" class="reel-product-title">Ceramide Cushion Cream</a>
+                    <span class="reel-product-price">₹899</span>
+                    <button class="btn btn-chrome reel-buy-btn add-to-cart-btn" data-id="moisturizing-cream">Add to Bag</button>
+                </div>
+            </div>
+        
+            <div class="reel-item">
+                <div class="reel-card" data-product-id="eye-gel">
+                    <video class="reel-video" src="https://player.vimeo.com/external/372789822.sd.mp4?s=ff563b4a77e1f7265a6d96d66ea9f96940d9acbe&amp;profile_id=139&amp;oauth2_token_id=1223210874" loop="" muted="" autoplay="" playsinline=""></video>
+                    <div class="reel-overlay">
+                        <div class="reel-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="reel-sound-indicator"><i class="fa-solid fa-volume-xmark"></i></div>
+                        <div class="reel-info-box">
+                            <p class="reel-caption">Instant morning depuff</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reel-product-footer">
+                    <a href="#/product/eye-gel" class="reel-product-title">Peptide Eye Gel</a>
+                    <span class="reel-product-price">₹599</span>
+                    <button class="btn btn-chrome reel-buy-btn add-to-cart-btn" data-id="eye-gel">Add to Bag</button>
+                </div>
+            </div>
+        
+            <div class="reel-item">
+                <div class="reel-card" data-product-id="serum">
+                    <video class="reel-video" src="https://player.vimeo.com/external/223840006.hd.mp4?s=54a1da69d40a39c25fa2088d50ed0d46447e7149&amp;profile_id=175" loop="" muted="" autoplay="" playsinline=""></video>
+                    <div class="reel-overlay">
+                        <div class="reel-play-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="reel-sound-indicator"><i class="fa-solid fa-volume-xmark"></i></div>
+                        <div class="reel-info-box">
+                            <p class="reel-caption">Clear pores &amp; smooth skin</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reel-product-footer">
+                    <a href="#/product/serum" class="reel-product-title">Niacinamide Serum</a>
+                    <span class="reel-product-price">₹799</span>
+                    <button class="btn btn-chrome reel-buy-btn add-to-cart-btn" data-id="serum">Add to Bag</button>
+                </div>
+            </div>
+        
+                    </div>
+                    <button class="reels-control-btn next-btn" id="reels-next-btn" aria-label="Next videos"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </section>
+
+            <section class="why-choose-us">
+                <div class="why-container">
+                    <div class="why-image">
+                        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&amp;fit=crop&amp;q=80&amp;w=600" alt="skincare routine models">
+                    </div>
+                    <div class="why-content">
+                        <h2>Why Choose your Wellnez?</h2>
+                        <div class="why-items">
+                            <div class="why-item">
+                                <span class="why-item-num">01</span>
+                                <div class="why-item-text">
+                                    <h4>No Toxic Fillers</h4>
+                                    <p>100% free from drying alcohols, synthetic fragrances, sulfates, and essential oils that trigger skin barrier breakdowns.</p>
+                                </div>
+                            </div>
+                            <div class="why-item">
+                                <span class="why-item-num">02</span>
+                                <div class="why-item-text">
+                                    <h4>Sustainable Materials</h4>
+                                    <p>We use recyclable packaging and sustainably sourced organic botanical extracts for environmental stewardship.</p>
+                                </div>
+                            </div>
+                            <div class="why-item">
+                                <span class="why-item-num">03</span>
+                                <div class="why-item-text">
+                                    <h4>Transparent Ingredients</h4>
+                                    <p>We disclose every single ingredient concentration. What you read on the bottle is exactly what you put on your skin.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="promo-offer-banner">
+                <div class="promo-offer-container">
+                    <h2>Enjoy 10% Off Your First Purchase</h2>
+                    <p>Reinforce your skin barrier today. Enter code <strong style="font-family: var(--font-heading);">WELLNEZ10</strong> at checkout to apply discount.</p>
+                    <a href="#/shop" class="btn btn-chrome">Unlock Coupon Now</a>
+                </div>
+            </section>
+
+            <section class="reviews-section">
+                <div class="section-header">
+                    <h2>What the Glow Club Says</h2>
+                    <p>Real reviews from real members who transformed their skin barrier health.</p>
+                </div>
+                <div class="reviews-container">
+                    <div class="reviews-grid">
+                        <div class="review-card">
+                            <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <h4 class="review-title">Dry patches are gone!</h4>
+                            <p class="review-text">"I spent months repairing my barrier after over-exfoliating. Using the Slick Cleanse and Sunscreen combo saved my skin!"</p>
+                            <span class="review-author">Aisha M.</span>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <h4 class="review-title">Best Sunscreen ever!</h4>
+                            <p class="review-text">"Most sunscreens cause white casts or breakouts. This Matte SPF feels completely weightless and controls sebum grease."</p>
+                            <span class="review-author">Karthik R.</span>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <h4 class="review-title">Gentle yet effective</h4>
+                            <p class="review-text">"The cleanser feels extremely luxurious. It is gel-like, foaming gently, and strips nothing. Skin feels soft."</p>
+                            <span class="review-author">Meera J.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+    <!-- Slide-out Shopping Cart Drawer -->
+    <div class="cart-drawer-overlay active" id="cart-overlay"></div>
+    <div class="cart-drawer active" id="cart-drawer">
+        <div class="cart-drawer-header">
+            <h3>Your Cart (<span id="cart-drawer-count">1</span>)</h3>
+            <button class="cart-drawer-close" id="cart-drawer-close">×</button>
+        </div>
+        <div class="cart-drawer-content" id="cart-drawer-content">
+                    <div class="cart-item" data-id="face-wash">
+                        <div class="cart-item-image">
+                            <img src="images/face_wash.png" alt="Slick Cleanse Hydrating Wash">
+                        </div>
+                        <div class="cart-item-details">
+                            <h4 class="cart-item-title">Slick Cleanse Hydrating Wash</h4>
+                            <div class="cart-item-price">₹699</div>
+                            <div class="cart-item-qty">
+                                <button class="cart-qty-dec" data-id="face-wash">-</button>
+                                <span>1</span>
+                                <button class="cart-qty-inc" data-id="face-wash">+</button>
+                            </div>
+                        </div>
+                        <button class="cart-item-remove" data-id="face-wash" aria-label="Remove item"><i class="fa-regular fa-trash-can"></i></button>
+                    </div>
+                </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-summary-row">
+                <span>Subtotal</span>
+                <span id="cart-drawer-subtotal">₹699</span>
+            </div>
+            <div class="cart-summary-row shipping-note">
+                <span>Shipping</span>
+                <span id="cart-drawer-shipping">₹80</span>
+            </div>
+            <div class="cart-summary-row discount-row" id="cart-drawer-discount-row" style="display: none;">
+                <span>Discount (<span id="cart-drawer-discount-code"></span>)</span>
+                <span id="cart-drawer-discount-amount">-₹0.00</span>
+            </div>
+            <div class="cart-summary-row total-row">
+                <span>Total</span>
+                <span id="cart-drawer-total">₹779</span>
+            </div>
+            <div class="cart-coupon-section">
+                <input type="text" id="cart-coupon-input" placeholder="Enter Coupon Code">
+                <button id="cart-coupon-apply-btn">Apply</button>
+            </div>
+            <div class="coupon-feedback" id="coupon-feedback"></div>
+            <div class="cart-drawer-actions">
+                <a href="#/checkout" class="btn btn-chrome btn-block" id="cart-checkout-btn">Secure Checkout</a>
+                <button class="btn btn-secondary btn-block" id="cart-continue-shopping">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Widget -->
+    <a href="https://wa.me/919999999999?text=Hi!%20I%20have%20a%20question%20about%20your%20Wellnez%20skincare." target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Need Help? Chat with us!</span>
+    </a>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <!-- Branding column -->
+                <div class="footer-col brand-col">
+                    <div class="footer-logo-wrapper" style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                        <img src="images/logo.png" alt="your Wellnez Logo" style="height: 52px; max-height: 52px; object-fit: contain; display: block;">
+                        <span style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; text-transform: lowercase; letter-spacing: -0.03em; color: var(--text-main); line-height: 1;">your Wellnez</span>
+                    </div>
+                    <p class="footer-description">
+                        Premium, high-performance skincare prioritizing skin barrier health. Dermatologist tested, cruelty-free, and designed for real-world confidence.
+                    </p>
+                    <div class="footer-socials">
+                        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="mailto:hello@yourwellnez.com" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="footer-col">
+                    <h4>Shop &amp; Discover</h4>
+                    <ul>
+                        <li><a href="#/shop">Shop All</a></li>
+                        <li><a href="#/product/face-wash">Slick Cleanse Face Wash</a></li>
+                        <li><a href="#/product/sunscreen">Matte Shield Sunscreen</a></li>
+                        <li><a href="#/about">Our Story</a></li>
+                    </ul>
+                </div>
+
+                <!-- Info & FAQ -->
+                <div class="footer-col">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a href="#/contact">Contact Us</a></li>
+                        <li><a href="#/faq">FAQs</a></li>
+                        <li><a href="#/shipping-policy">Shipping Policy</a></li>
+                        <li><a href="#/return-policy">Returns &amp; Refunds</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter / Sign up -->
+                <div class="footer-col newsletter-col">
+                    <h4>Join the Glow Club</h4>
+                    <p>Subscribe to get skin health tips, early access to new launches, and 10% off your first order.</p>
+                    <form class="footer-newsletter-form" id="newsletter-form">
+                        <input type="email" placeholder="Your email address" required="" aria-label="Email Address">
+                        <button type="submit" class="btn btn-chrome">Subscribe</button>
+                    </form>
+                    <div id="newsletter-feedback" class="newsletter-feedback"></div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-policies">
+                    <a href="#/privacy-policy">Privacy Policy</a>
+                    <a href="#/terms-conditions">Terms &amp; Conditions</a>
+                    <a href="admin.html" style="font-weight: 700; color: var(--text-main); margin-left: 20px;"><i class="fa-solid fa-gauge-high"></i> Admin Portal</a>
+                </div>
+                <p class="copyright">© 2026 your Wellnez. All rights reserved. Created with care for skin barriers everywhere.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Order Details Modal (Admin/Customer Dashboard) -->
+    <div class="modal-overlay" id="order-details-modal">
+        <div class="modal-content-card">
+            <button class="modal-close-btn" id="order-modal-close">×</button>
+            <div class="modal-title">Order Details</div>
+            <div id="modal-order-content">
+                <!-- Dynamic Content Load -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Promo Pop-up Modal ( Science & Roots style ) -->
+    <div class="modal-overlay active" id="promo-popup-modal">
+        <div class="promo-modal-card">
+            <button class="promo-close-btn" id="promo-close-btn" aria-label="Close offer">×</button>
+            <div class="promo-modal-content">
+                <div class="promo-logo-wrap">
+                    <img src="images/logo.png" alt="your Wellnez Logo" class="promo-logo">
+                </div>
+                <h2 class="promo-title">25% OFF</h2>
+                <h3 class="promo-subtitle">ON YOUR FIRST ORDER</h3>
+                <p class="promo-text">Sign up to receive your discount coupon.</p>
+                <form id="promo-popup-form">
+                    <input type="email" id="promo-email-input" placeholder="Email" required="" class="promo-input">
+                    <button type="submit" class="btn btn-chrome promo-submit-btn">SIGN ME UP!</button>
+                </form>
+                <button type="button" class="promo-no-thanks" id="promo-no-thanks-btn">NO, THANKS</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Application Logic -->
+    <script src="js/app.js"></script>
+    <script>
+        window.onerror = function(msg, url, line, col, error) {
+            var div = document.createElement('div');
+            div.id = 'js-error-log';
+            div.style.color = 'red';
+            div.style.padding = '20px';
+            div.style.background = 'yellow';
+            div.style.position = 'fixed';
+            div.style.top = '0';
+            div.style.zIndex = '99999';
+            div.innerText = 'ERROR: ' + msg + ' at ' + url + ':' + line + ':' + col;
+            document.body.appendChild(div);
+        };
+        window.addEventListener("load", () => {
+            setTimeout(() => {
+                try {
+                    // Find first product card Add to Cart button
+                    var btn = document.querySelector(".products-grid .add-to-cart-btn");
+                    if (btn) {
+                        btn.click();
+                    }
+                    // Open cart drawer
+                    var cartBtn = document.getElementById("cart-toggle-btn");
+                    if (cartBtn) {
+                        cartBtn.click();
+                    }
+                } catch (e) {
+                    var div = document.createElement('div');
+                    div.id = 'js-error-log';
+                    div.innerText = 'AUTO-ERR: ' + e.message;
+                    document.body.appendChild(div);
+                }
+            }, 1000);
+        });
+    </script>
+
+
+</body></html>

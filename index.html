@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Supabase client JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <title>your Wellnez | Skin Barrier-First Skincare</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Clean, barrier-supporting skincare. Discover our dermatologist-approved Face Wash and SPF 50 Sunscreen for healthy, glowing skin.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <p>FREE SHIPPING ON ORDERS ABOVE ₹999 | USE CODE <span class="promo-badge">WELLNEZ10</span> FOR 10% OFF</p>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="main-header">
+        <div class="header-container">
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- Brand Logo -->
+            <a href="#/" class="brand-logo" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+                <img src="images/logo.png" alt="your Wellnez Logo" style="height: 52px; max-height: 52px; object-fit: contain; display: block;">
+                <span style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; text-transform: lowercase; letter-spacing: -0.03em; color: var(--text-main); line-height: 1;">your Wellnez</span>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="nav-menu" id="nav-menu">
+                <button class="nav-menu-close" id="nav-close">&times;</button>
+                <ul>
+                    <li><a href="#/">Home</a></li>
+                    <li><a href="#/shop">Shop</a></li>
+                    <li><a href="#/about">About Us</a></li>
+                    <li><a href="#/contact">Contact Us</a></li>
+                    <li><a href="#/faq">FAQ</a></li>
+                </ul>
+            </nav>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <!-- Search Button -->
+                <div class="search-container">
+                    <button id="search-trigger" aria-label="Search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <div class="search-dropdown" id="search-dropdown">
+                        <div class="search-input-wrapper">
+                            <input type="text" id="search-input" placeholder="Search products (e.g. face wash, sunscreen)...">
+                            <button id="search-submit-btn"><i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                        <div class="search-results-preview" id="search-results-preview"></div>
+                    </div>
+                </div>
+
+                <!-- Account Icon -->
+                <a href="#/account" class="header-action-btn" id="account-btn" aria-label="My Account">
+                    <i class="fa-regular fa-user"></i>
+                </a>
+
+                <!-- Wishlist Icon -->
+                <a href="#/wishlist" class="header-action-btn" id="wishlist-btn" aria-label="Wishlist">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="badge" id="wishlist-count">0</span>
+                </a>
+
+                <!-- Cart Icon -->
+                <button class="header-action-btn" id="cart-toggle-btn" aria-label="Shopping Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="badge" id="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="app-viewport"></main>
+
+    <!-- Slide-out Shopping Cart Drawer -->
+    <div class="cart-drawer-overlay" id="cart-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-drawer-header">
+            <h3>Your Cart (<span id="cart-drawer-count">0</span>)</h3>
+            <button class="cart-drawer-close" id="cart-drawer-close">&times;</button>
+        </div>
+        <div class="cart-drawer-content" id="cart-drawer-content">
+            <!-- Dynamic Cart Items Rendered Here -->
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-summary-row">
+                <span>Subtotal</span>
+                <span id="cart-drawer-subtotal">₹0.00</span>
+            </div>
+            <div class="cart-summary-row shipping-note">
+                <span>Shipping</span>
+                <span id="cart-drawer-shipping">Calculated at checkout</span>
+            </div>
+            <div class="cart-summary-row discount-row" id="cart-drawer-discount-row" style="display: none;">
+                <span>Discount (<span id="cart-drawer-discount-code"></span>)</span>
+                <span id="cart-drawer-discount-amount">-₹0.00</span>
+            </div>
+            <div class="cart-summary-row total-row">
+                <span>Total</span>
+                <span id="cart-drawer-total">₹0.00</span>
+            </div>
+            <div class="cart-coupon-section">
+                <input type="text" id="cart-coupon-input" placeholder="Enter Coupon Code">
+                <button id="cart-coupon-apply-btn">Apply</button>
+            </div>
+            <div class="coupon-feedback" id="coupon-feedback"></div>
+            <div class="cart-drawer-actions">
+                <a href="#/checkout" class="btn btn-chrome btn-block" id="cart-checkout-btn">Secure Checkout</a>
+                <button class="btn btn-secondary btn-block" id="cart-continue-shopping">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Widget -->
+    <a href="https://wa.me/919999999999?text=Hi!%20I%20have%20a%20question%20about%20your%20Wellnez%20skincare." 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="whatsapp-float" 
+       aria-label="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Need Help? Chat with us!</span>
+    </a>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <!-- Branding column -->
+                <div class="footer-col brand-col">
+                    <div class="footer-logo-wrapper" style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                        <img src="images/logo.png" alt="your Wellnez Logo" style="height: 52px; max-height: 52px; object-fit: contain; display: block;">
+                        <span style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; text-transform: lowercase; letter-spacing: -0.03em; color: var(--text-main); line-height: 1;">your Wellnez</span>
+                    </div>
+                    <p class="footer-description">
+                        Premium, high-performance skincare prioritizing skin barrier health. Dermatologist tested, cruelty-free, and designed for real-world confidence.
+                    </p>
+                    <div class="footer-socials">
+                        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="mailto:hello@yourwellnez.com" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="footer-col">
+                    <h4>Shop & Discover</h4>
+                    <ul>
+                        <li><a href="#/shop">Shop All</a></li>
+                        <li><a href="#/product/face-wash">Slick Cleanse Face Wash</a></li>
+                        <li><a href="#/product/sunscreen">Matte Shield Sunscreen</a></li>
+                        <li><a href="#/about">Our Story</a></li>
+                    </ul>
+                </div>
+
+                <!-- Info & FAQ -->
+                <div class="footer-col">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a href="#/contact">Contact Us</a></li>
+                        <li><a href="#/faq">FAQs</a></li>
+                        <li><a href="#/shipping-policy">Shipping Policy</a></li>
+                        <li><a href="#/return-policy">Returns & Refunds</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter / Sign up -->
+                <div class="footer-col newsletter-col">
+                    <h4>Join the Glow Club</h4>
+                    <p>Subscribe to get skin health tips, early access to new launches, and 10% off your first order.</p>
+                    <form class="footer-newsletter-form" id="newsletter-form">
+                        <input type="email" placeholder="Your email address" required aria-label="Email Address">
+                        <button type="submit" class="btn btn-chrome">Subscribe</button>
+                    </form>
+                    <div id="newsletter-feedback" class="newsletter-feedback"></div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-policies">
+                    <a href="#/privacy-policy">Privacy Policy</a>
+                    <a href="#/terms-conditions">Terms & Conditions</a>
+                    <a href="admin.html" style="font-weight: 700; color: var(--text-main); margin-left: 20px;"><i class="fa-solid fa-gauge-high"></i> Admin Portal</a>
+                </div>
+                <p class="copyright">&copy; 2026 your Wellnez. All rights reserved. Created with care for skin barriers everywhere.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Order Details Modal (Admin/Customer Dashboard) -->
+    <div class="modal-overlay" id="order-details-modal">
+        <div class="modal-content-card">
+            <button class="modal-close-btn" id="order-modal-close">&times;</button>
+            <div class="modal-title">Order Details</div>
+            <div id="modal-order-content">
+                <!-- Dynamic Content Load -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Promo Pop-up Modal ( Science & Roots style ) -->
+    <div class="modal-overlay" id="promo-popup-modal">
+        <div class="promo-modal-card">
+            <button class="promo-close-btn" id="promo-close-btn" aria-label="Close offer">&times;</button>
+            <div class="promo-modal-content">
+                <div class="promo-logo-wrap">
+                    <img src="images/logo.png" alt="your Wellnez Logo" class="promo-logo">
+                </div>
+                <h2 class="promo-title">25% OFF</h2>
+                <h3 class="promo-subtitle">ON YOUR FIRST ORDER</h3>
+                <p class="promo-text">Sign up to receive your discount coupon.</p>
+                <form id="promo-popup-form">
+                    <input type="email" id="promo-email-input" placeholder="Email" required class="promo-input">
+                    <button type="submit" class="btn btn-chrome promo-submit-btn">SIGN ME UP!</button>
+                </form>
+                <button type="button" class="promo-no-thanks" id="promo-no-thanks-btn">NO, THANKS</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Application Logic -->
+    <script src="js/app.js"></script>
+</body>
+</html>
